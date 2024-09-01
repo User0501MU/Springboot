@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ログイン画面</title>
+</head>
+
+
+<body>
+<h2>ログイン画面やで！</h2>
+
+<form th:action="@{/login}" method="post" th:object="${loginForm}"><!-- Modelクラスからデータを受け取る際は$｛Key｝と実装 -->
+<div>
+<label>ログインID</label>
+<input type="text" th:field="*{loginId}">
+</div>
+
+<div>
+<label>パスワード</label>
+<input type="password" th:field="*{password}">
+</div>
+
+<div>
+<input type="submit" value="ログイン">
+</div>
+</form>
+</body>
+</html>
