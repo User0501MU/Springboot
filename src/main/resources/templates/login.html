@@ -8,6 +8,7 @@
 
 <body>
 <h2>ログイン画面やで！</h2>
+<span th:text="${errorMsa}"></span><!-- $｛errorMsa｝でcontrollerから値を受け取る -->
 
 <form th:action="@{/login}" method="post" th:object="${loginForm}"><!-- Modelクラスからデータを受け取る際は$｛Key｝と実装 -->
 <div>

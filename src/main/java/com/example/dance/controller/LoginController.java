@@ -12,6 +12,11 @@ import com.example.dance.form.LoginForm;
 //@RequestMapping("/login")//ログイン画面
 public class LoginController {
 
+	//定数で定義
+	private static final String LOGIN_ID = "user";
+
+	private static final String PASSWORD ="pwd";
+
 	@GetMapping("/login")//@@RequestMappingなしで@GetMappingに直接(引数)でも表示可
 	public String view(Model model,LoginForm form) {//Model は、controllerからhtmlへデータを受け渡す為のクラス、keyとvalueセットで受け渡す
 		//ログイン画面なので今回は初期値不要の為、model.addattribute は使わず、Modelに引数としてformをSpringで画面に渡すという風に記述
@@ -20,8 +25,18 @@ public class LoginController {
 
 	//ログイン画面の入力値を受け取る、ログイン牡丹押した際の処理
 	@PostMapping("/login")
-	public void login(LoginForm form) {
-		System.out.println(form.toString());
-	}
+	public String login(Model model,LoginForm form) {
+		//System.out.println(form.toString());
 
+		//isCorrectUserAuthはboolean型の変数でID,PWが間違っていればfalse
+		//DBからだと少し記述が変わる
+		var isCorrectUserAuth = form.getLoginId().equals(LOGIN_ID)
+				&&form.getPassword().equals(PASSWORD);
+		if(isCorrectUserAuth) {//変数を見てif文
+			return"redirect:/menu";//戻り値voidをString
+		}else {
+			model.addAttribute("errorMsa","ログインIDとPWの組み合わせが間違っています。");//modelを使えるようにするためModel model,を記述　addAttributeはcontrollerからビューに渡す
+			return"login";
+		}
+	}
 }
