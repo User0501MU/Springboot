@@ -63,3 +63,14 @@ user_info=# SELECT * FROM user_credentials WHERE login = 'user1';
 (1 行)
 
 user_info=# SELECT * FROM user_credentials WHERE login = 'user2';
+
+
+修正
+CREATE TABLE user_info (
+
+  login_id VARCHAR(255) PRIMARY KEY,
+  
+  password VARCHAR(255) NOT NULL
+  
+);
+
