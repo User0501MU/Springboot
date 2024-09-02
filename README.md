@@ -28,6 +28,7 @@ postgres=# DROP DATABASE test_database;
 --1. データベースに接続する
 
 postgres=# \c user_info
+
 データベース"user_info"にユーザー"postgres"として接続しました。
 
 --2,テーブルの作成
@@ -50,6 +51,7 @@ CREATE TABLE user_credentials (
 INSERT INTO user_credentials (login, password) VALUES ('user1', 'psd1');
 
 user_info=# -- 特定の条件でデータを表示
+
 user_info=# SELECT * FROM user_credentials WHERE login = 'user1';
 
  id | login | password
