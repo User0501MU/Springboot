@@ -21,13 +21,25 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 
 https://www.tohoho-web.com/ex/postgresql.html#drop-database
 
+--0,データベース作成
 
---1. psql でデータベースに接続する
-psql -U your_username -d user_info
+postgres=# DROP DATABASE test_database;
+
+--1. データベースに接続する
+
+postgres=# \c user_info
+データベース"user_info"にユーザー"postgres"として接続しました。
 
 --2,テーブルの作成
+
 CREATE TABLE user_credentials (
+
     id SERIAL PRIMARY KEY,         -- 自動インクリメントの主キー
+    
     login VARCHAR(20) NOT NULL,    -- 最大20文字のログインID
+    
     password VARCHAR(20) NOT NULL  -- 最大20文字のパスワード
 );
+
+--テーブル中身一覧
+\d user_credentials;
