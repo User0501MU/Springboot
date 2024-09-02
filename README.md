@@ -6,11 +6,17 @@
 
 # application.property
   #PostgreSQL Database Configuration
+  
 spring.datasource.url=jdbc:postgresql://localhost:5432/mydatabase
+
 spring.datasource.username=root
+
 spring.datasource.password=任意のpw
+
 #spring.jpa.hibernate.ddl-auto=update
+
 spring.jpa.show-sql=true
+
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 
 --1. psql でデータベースに接続する
