@@ -19,6 +19,9 @@ spring.jpa.show-sql=true
 
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 
+https://www.tohoho-web.com/ex/postgresql.html#drop-database
+
+
 --1. psql でデータベースに接続する
 psql -U your_username -d user_info
 
