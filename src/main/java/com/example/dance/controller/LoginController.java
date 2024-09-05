@@ -1,5 +1,6 @@
 package com.example.dance.controller;
 
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,15 +8,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.dance.form.LoginForm;
+import com.example.dance.service.LoginService;
+
+////import lombok.RequiredArgsConstructor;
+////import repository.UserInfoRepository;
 
 @Controller
+//@RequiredArgsConstructor
 //@RequestMapping("/login")//ログイン画面
-public class LoginController {
+public class LoginController{
 
-	//定数で定義
-	private static final String LOGIN_ID = "user";
+	/*
+	 * //定数で定義 private static final String LOGIN_ID = "user";
+	 *
+	 * private static final String PASSWORD ="pwd";
+	 */
 
-	private static final String PASSWORD ="pwd";
+	/*service追記*/
+	private final LoginService service;//lombokの場合、コンストラクタの宣言
+
+//	   @Autowired
+	    public LoginController(LoginService service) {
+	        this.service = service;
+	    }
 
 	@GetMapping("/login")//@@RequestMappingなしで@GetMappingに直接(引数)でも表示可
 	public String view(Model model,LoginForm form) {//Model は、controllerからhtmlへデータを受け渡す為のクラス、keyとvalueセットで受け渡す
@@ -30,8 +45,15 @@ public class LoginController {
 
 		//isCorrectUserAuthはboolean型の変数でID,PWが間違っていればfalse
 		//DBからだと少し記述が変わる
-		var isCorrectUserAuth = form.getLoginId().equals(LOGIN_ID)
-				&&form.getPassword().equals(PASSWORD);
+
+		/*service追記*/
+		var userInfo =service.searchUserById(form.getLoginId());
+		var isCorrectUserAuth =userInfo.isPresent()
+				&&form.getPassword().equals(userInfo.get().getPassword());
+		/*
+		 * var isCorrectUserAuth = form.getLoginId().equals(LOGIN_ID)
+		 * &&form.getPassword().equals(PASSWORD);
+		 */
 		if(isCorrectUserAuth) {//変数を見てif文
 			return"redirect:/menu";//戻り値voidをString
 		}else {
