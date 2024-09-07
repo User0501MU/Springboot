@@ -16,5 +16,6 @@ public class UserInfo {
 	@Column(name = "login_id")//TBL（tacle)のフィールド名とEntityのフィールド名が異なるので@Columnで紐づける
 	private String loginId;
 
+
 	private String password;
 }
